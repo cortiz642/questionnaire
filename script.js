@@ -34,10 +34,12 @@ function showQuestion(question){
             button.dataset.correct = answer.correct
         }
         button.addEventListener('click', selectAnswer)
+        answerButtonsElement.appendChild(button)
     })
 }
 
 function resetState(){
+    clearStatusClass(document.body)
     nextButton.classList.add('hide')
     while(answerButtonsElement.firstChild){
         answerButtonsElement.removeChild
@@ -51,12 +53,13 @@ function selectAnswer(e) {
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
-    if(shuffledQuestions.length > currentQuestionIndex + 1){
+    if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove('hide')
-}else{
+    } else {
         startButton.innerText = 'Restart'
         startButton.classList.remove('hide')
     }
+}
     function setStatusClass(element, correct){
         clearStatusClass(element)
         if(correct){
@@ -70,11 +73,10 @@ function selectAnswer(e) {
         element.classList.remove('correct')
         element.classList.remove('wrong')
     }
-}
 
 const questions = [
     {
-    questions: 'What is 2 + 2',
+    question: 'What is 2 + 2',
     answers: [
         { text: '4', correct: true
     },
